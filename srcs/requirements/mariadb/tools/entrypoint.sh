@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# https://stackoverflow.com/questions/16287559/mysql-adding-user-for-remote-access
+
 if [ -z $WP_DB_NAME ] || [ -z $WP_DB_USER ] || [ -z $WP_DB_PASSWORD ]; then
     echo "environment variables WP_DB_NAME, WP_DB_USER and WP_DB_PASSWORD are required."
     exit 1

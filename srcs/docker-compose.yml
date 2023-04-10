@@ -11,6 +11,12 @@ services:
 
   nginx:
     build: ./requirements/nginx
+    ports:
+      - 80:80
+    volumes:
+      - ./www:/var/www:ro
 
   wordpress:
     build: ./requirements/wordpress
+    volumes:
+      - ./www:/var/www:rw
