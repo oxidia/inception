@@ -1,3 +1,5 @@
 .env
 mariadb-data/
 www/
+*.crt
+*.key
