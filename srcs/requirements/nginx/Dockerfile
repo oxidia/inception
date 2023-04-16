@@ -2,7 +2,9 @@ FROM alpine:3.17
 
 RUN apk add --no-cache nginx
 
-COPY ./conf/wordpress.conf /etc/nginx/http.d/default.conf
+COPY ./conf/default.conf /etc/nginx/http.d/default.conf
+# COPY ./conf/wordpress.conf /etc/nginx/http.d/wordpress.conf
+# COPY ./conf/adminer.conf /etc/nginx/http.d/adminer.conf
 
 RUN mkdir -p /etc/ssl/certs/wordpress && mkdir -p /etc/ssl/private/wordpress
 

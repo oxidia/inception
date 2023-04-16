@@ -36,8 +36,16 @@ RUN apk add --no-cache \
     php7-ldap \
     php7-ctype \
     php7-dom \
-    php7-simplexml
+    php7-simplexml \
+    php7-tokenizer
 
 COPY ./conf/php-fpm.conf /etc/php7/php-fpm.d/www.conf
 
-ENTRYPOINT [ "php-fpm7", "-F" ]
+
+COPY ./tools/entrypoint.sh /tmp
+
+RUN chmod u+x /tmp/entrypoint.sh
+
+WORKDIR /var/www/wordpress
+
+ENTRYPOINT [ "/tmp/entrypoint.sh" ]

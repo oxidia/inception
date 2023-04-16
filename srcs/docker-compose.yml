@@ -6,17 +6,49 @@ services:
     hostname: mariadb
     volumes:
       - ./mariadb-data:/var/lib/mysql
-    env_file:
-      - ./requirements/mariadb/.env
+    environment:
+      - DB_NAME=$DB_NAME
+      - DB_USER=$DB_USER
+      - DB_PASSWORD=$DB_PASSWORD
 
   nginx:
     build: ./requirements/nginx
+    hostname: nginx
     ports:
       - 443:443
     volumes:
       - ./www:/var/www:ro
+    depends_on:
+      - wordpress
 
   wordpress:
     build: ./requirements/wordpress
+    hostname: wordpress
     volumes:
-      - ./www:/var/www:rw
+      - ./www/wordpress:/var/www/wordpress:rw
+    environment:
+      - DOMAIN_NAME=$DOMAIN_NAME
+      - DB_HOSTNAME=$DB_HOSTNAME
+      - DB_NAME=$DB_NAME
+      - DB_USER=$DB_USER
+      - DB_PASSWORD=$DB_PASSWORD
+      - ADMIN_USER=$ADMIN_USER
+      - ADMIN_PASSWORD=$ADMIN_PASSWORD
+      - ADMIN_EMAIL=$ADMIN_EMAIL
+      - REDIS_HOST=$REDIS_HOST
+      - REDIS_PORT=$REDIS_PORT
+    depends_on:
+      - mariadb
+      - redis
+
+  redis:
+    build: ./requirements/bonus/redis
+    hostname: redis
+
+  adminer:
+    build: ./requirements/bonus/adminer
+    hostname: adminer
+    volumes:
+      - ./www/adminer:/var/www/adminer:rw
+    depends_on:
+      - mariadb
