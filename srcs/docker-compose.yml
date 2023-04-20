@@ -44,6 +44,15 @@ services:
   redis:
     build: ./requirements/bonus/redis
     hostname: redis
+  
+  redis-gui:
+    build: ./requirements/bonus/redis-gui
+    hostname: redis-gui
+    environment:
+      - REDIS_HOST=$REDIS_HOST
+      - REDIS_PORT=$REDIS_PORT
+    depends_on:
+      - redis
 
   adminer:
     build: ./requirements/bonus/adminer
