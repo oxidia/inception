@@ -14,10 +14,8 @@ RUN apk add --no-cache \
 
 COPY ./conf/php-fpm.conf /etc/php7/php-fpm.d/www.conf
 
-COPY ./tools/entrypoint.sh /tmp
-
-RUN chmod u+x /tmp/entrypoint.sh
-
 WORKDIR /var/www/adminer
 
-ENTRYPOINT [ "/tmp/entrypoint.sh" ]
+RUN wget https://github.com/vrana/adminer/releases/download/v4.8.1/adminer-4.8.1.php -O index.php 
+
+CMD [ "php-fpm7", "-F" ]

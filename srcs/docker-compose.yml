@@ -5,7 +5,7 @@ services:
     build: ./requirements/mariadb
     hostname: mariadb
     volumes:
-      - ./mariadb-data:/var/lib/mysql
+      - $VOLUMES_ROOT_PATH/mariadb:/var/lib/mysql
     environment:
       - DB_NAME=$DB_NAME
       - DB_USER=$DB_USER
@@ -17,7 +17,7 @@ services:
     ports:
       - 443:443
     volumes:
-      - ./www:/var/www:ro
+      - $VOLUMES_ROOT_PATH/wordpress:/var/www:ro
     depends_on:
       - wordpress
 
@@ -25,7 +25,7 @@ services:
     build: ./requirements/wordpress
     hostname: wordpress
     volumes:
-      - ./www/wordpress:/var/www/wordpress:rw
+      - $VOLUMES_ROOT_PATH/wordpress:/var/www/wordpress:rw
     environment:
       - DOMAIN_NAME=$DOMAIN_NAME
       - DB_HOSTNAME=$DB_HOSTNAME
@@ -57,7 +57,5 @@ services:
   adminer:
     build: ./requirements/bonus/adminer
     hostname: adminer
-    volumes:
-      - ./www/adminer:/var/www/adminer:rw
     depends_on:
       - mariadb
