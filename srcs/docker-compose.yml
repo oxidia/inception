@@ -59,3 +59,16 @@ services:
     hostname: adminer
     depends_on:
       - mariadb
+  
+  ftp:
+    build: ./requirements/bonus/ftp
+    hostname: ftp
+    ports:
+      - 21:21
+    volumes:
+      - $VOLUMES_ROOT_PATH/wordpress:/var/www
+    environment:
+      - FTP_USER=$FTP_USER
+      - FTP_PASSWORD=$FTP_PASSWORD
+    depends_on:
+      - wordpress
