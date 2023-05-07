@@ -10,6 +10,11 @@ services:
       - DB_NAME=$DB_NAME
       - DB_USER=$DB_USER
       - DB_PASSWORD=$DB_PASSWORD
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
 
   nginx:
     build: ./requirements/nginx
@@ -20,6 +25,11 @@ services:
       - $VOLUMES_ROOT_PATH/wordpress:/var/www:ro
     depends_on:
       - wordpress
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
 
   wordpress:
     build: ./requirements/wordpress
@@ -40,10 +50,20 @@ services:
     depends_on:
       - mariadb
       - redis
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
 
   redis:
     build: ./requirements/bonus/redis
     hostname: redis
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
   
   redis-gui:
     build: ./requirements/bonus/redis-gui
@@ -53,12 +73,22 @@ services:
       - REDIS_PORT=$REDIS_PORT
     depends_on:
       - redis
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
 
   adminer:
     build: ./requirements/bonus/adminer
     hostname: adminer
     depends_on:
       - mariadb
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
   
   ftp:
     build: ./requirements/bonus/ftp
@@ -72,3 +102,8 @@ services:
       - FTP_PASSWORD=$FTP_PASSWORD
     depends_on:
       - wordpress
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
