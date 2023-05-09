@@ -19,7 +19,7 @@ stop: $(DOCKER_COMPOSE_PATH)
 	docker compose -f $^ stop
 
 clean: $(DOCKER_COMPOSE_PATH)
-	docker compose -f $^ down
+	docker compose -f $^ down -v
 
 fclean: clean
 	rm -rf /home/$(USER)/data
