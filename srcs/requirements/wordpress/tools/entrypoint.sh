@@ -4,7 +4,7 @@
 
 if ! wp --allow-root core is-installed; then
 
-    wp --allow-root core download --path=/var/www/wordpress
+    wp --allow-root core download --path=/var/www
 
     wp --allow-root config create \
         --dbhost="$DB_HOSTNAME" \

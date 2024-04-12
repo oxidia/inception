@@ -46,6 +46,6 @@ COPY ./tools/entrypoint.sh /tmp
 
 RUN chmod u+x /tmp/entrypoint.sh
 
-WORKDIR /var/www/wordpress
+WORKDIR /var/www
 
 ENTRYPOINT [ "/tmp/entrypoint.sh" ]
