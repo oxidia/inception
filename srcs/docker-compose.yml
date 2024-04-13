@@ -79,7 +79,6 @@ services:
   
   redis-gui:
     build: ./requirements/bonus/redis-gui
-    image: redis-gui
     hostname: redis-gui
     environment:
       - REDIS_HOST=$REDIS_HOST
@@ -96,7 +95,6 @@ services:
 
   adminer:
     build: ./requirements/bonus/adminer
-    image: adminer
     hostname: adminer
     depends_on:
       - mariadb
@@ -110,7 +108,6 @@ services:
   
   ftp:
     build: ./requirements/bonus/ftp
-    image: ftp
     hostname: ftp
     ports:
       - 21:21
